@@ -11,12 +11,14 @@ form.addEventListener("submit",  (e) => {
     const formData = new FormData(form);
     const query = formData.get("search-text");
 
-    clearGallery(gallery);
-    showLoader(gallery);
+    
 
     if(query.trim() === "") {
         return;
     }
+
+    clearGallery(gallery);
+    showLoader(gallery);
 
     getImagesByQuery(query).then((data) => {
         if(data.hits.length === 0) {
