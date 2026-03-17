@@ -9,6 +9,8 @@ axios.defaults.params = {
     safesearch: true,
 }
 
+const loader = document.querySelector(".loader");
+
 export const getImagesByQuery = async (query) =>{
     axios.defaults.params.q = query;
     const res = await axios.get("");
@@ -21,7 +23,6 @@ export function clearGallery(gallery) {
 
 export function showLoader(gallery) {
   clearGallery(gallery);
-  const loader = document.createElement("span");
   loader.textContent = "Loading";
   loader.classList.add("loader");
   gallery.appendChild(loader);
