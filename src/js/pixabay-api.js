@@ -9,7 +9,7 @@ axios.defaults.params = {
     safesearch: true,
 }
 
-const loader = document.querySelector(".loader");
+
 
 export const getImagesByQuery = async (query) =>{
     axios.defaults.params.q = query;
@@ -17,20 +17,3 @@ export const getImagesByQuery = async (query) =>{
     return res.data;
 }
 
-export function clearGallery(gallery) {
-    gallery.innerHTML = "";
-}
-
-export function showLoader(gallery) {
-  clearGallery(gallery);
-  loader.textContent = "Loading";
-  loader.classList.add("loader");
-  gallery.appendChild(loader);
-}
-
-export function hideLoader(gallery) {
-  const loader = gallery.querySelector(".loader");
-  if (loader) {
-    loader.remove();
-  }
-}
