@@ -59,6 +59,7 @@ export function createGallery(images){
     const gallery = document.querySelector(".gallery");
     const markup = imagesTemplate(images);
     gallery.innerHTML = markup;
+    initLightbox();
 }
 
 export function clearGallery(gallery) {

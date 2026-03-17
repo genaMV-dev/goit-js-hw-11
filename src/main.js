@@ -14,8 +14,12 @@ form.addEventListener("submit",  (e) => {
     clearGallery(gallery);
     showLoader(gallery);
 
+    if(query.trim() === "") {
+        return;
+    }
+
     getImagesByQuery(query).then((data) => {
-        if(data.hits.length === 0 || query.trim() === "") {
+        if(data.hits.length === 0) {
         iziToast.show({
             title: "Error",
             message: "Sorry, there are no images matching your search query. Please try again!",
@@ -24,9 +28,12 @@ form.addEventListener("submit",  (e) => {
         return;
     }
     createGallery(data.hits);
-    initLightbox();
     }).catch((err) => {
-        console.log(`Error`);
+        iziToast.show({
+            title: "Error",
+            message: "Sorry, there are no images matching your search query. Please try again!",
+            color: "red",
+        });
     }).finally(() => {
         hideLoader(gallery);
     });
