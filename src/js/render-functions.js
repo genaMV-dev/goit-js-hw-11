@@ -5,6 +5,15 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 const loader = document.querySelector(".loader");
 
+
+let lightboxInstance = null;
+
+const lightboxOptions = {
+  captions: true,
+  captionsData: 'alt',
+  captionDelay: 250,
+};
+
 function imageTemplate(image) {
   return `<li class="gallery-item">
     <a href="${image.largeImageURL}" class="gallery-link">
@@ -38,28 +47,29 @@ export function imagesTemplate(images) {
 }
 
 export function initLightbox() {
-  let gallery = new SimpleLightbox('.gallery a', {
-    captions: true,
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
+  if (!lightboxInstance) {
+    lightboxInstance = new SimpleLightbox('.gallery a', lightboxOptions);
+  }
 }
 
-
 export function refreshLightbox() {
-  let gallery = new SimpleLightbox('.gallery a', {
-    captions: true,
-    captionsData: 'alt',
-    captionDelay: 250,
-  });
-  gallery.refresh();
-};
+  if (lightboxInstance) {
+    lightboxInstance.refresh();
+  }
+}
 
 export function createGallery(images){
     const gallery = document.querySelector(".gallery");
     const markup = imagesTemplate(images);
     gallery.innerHTML = markup;
-    initLightbox();
+    
+   
+    if (!lightboxInstance) {
+        initLightbox();
+    } else {
+        
+        refreshLightbox();
+    }
 }
 
 export function clearGallery(gallery) {
